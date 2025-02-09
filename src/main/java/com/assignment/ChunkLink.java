@@ -1,21 +1,20 @@
 package com.assignment;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
+
 
 public class ChunkLink {
     private Node metaNode;
     private Node tailNode;
 
-    public void linkChunks(String path){
+    void linkChunks(String path){
         try (BufferedInputStream bufferInputStream = new BufferedInputStream(Files.newInputStream(Paths.get(path)))) {
             byte[] tempBuffer = new byte[1024 * 1024];
             int bytesRead;
@@ -25,39 +24,61 @@ public class ChunkLink {
             }
         } catch (IOException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
-        } catch (NoSuchAlgorithmException e) {
-	        throw new RuntimeException(e);
         }
     }   
 
-    public void add(String data) throws NoSuchAlgorithmException{
+    void add(String data){
         Node newNode = new Node(data);
         if(metaNode == null){
             metaNode = tailNode = newNode;
+            return;
         }
 
-        MessageDigest digester = MessageDigest.getInstance("SHA-256");
-        byte[] digestedByte = digester.digest(data.getBytes());
-        StringBuilder hashedHex = new StringBuilder();
-
-        for (byte b : digestedByte) {
-            String hex = Integer.toHexString(0xff & b);
-            if (hex.length() == 1) hashedHex.append('0');
-
-            hashedHex.append(hex);
-        }
-
-        tailNode.setNextCheckSum(String.valueOf(hashedHex));
+        tailNode.setNextCheckSum(newNode);
         tailNode.setNextNode(newNode);
         tailNode = newNode;
     }
 
-    public File reconstruct(){
-        Node currentNode = metaNode;
-	    return null;
+    void deleteLink() {
+        while (metaNode != null) {
+            Node temp = metaNode;
+            metaNode = metaNode.getNextNode();
+            temp.setNextNode(null);
+        }
+        tailNode = null;
+        System.out.println("Chunk-Link has been cleared and is empty.");
     }
 
-    private boolean isValidCheckSum(Node node){
-       String checkSum = node.getNextCheckSum();
+
+    public void reconstruct(String newFilePath) {
+        Node currentNode = metaNode;
+        Path filePath = Paths.get(newFilePath);
+
+        try {
+            Files.deleteIfExists(filePath); // Ensure fresh reconstruction
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        while (currentNode != null) {
+            if (currentNode.getNextNode() != null && !currentNode.validateCheckSum(currentNode.getNextNode())) {
+                System.out.println("Checksum mismatch detected. Reconstruction aborted.");
+                return;
+            }
+
+            try {
+                Files.write(filePath, currentNode.getData().getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+
+            currentNode = currentNode.getNextNode();
+        }
     }
+
+
+
+
 }

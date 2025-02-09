@@ -1,13 +1,13 @@
 package com.assignment;
 
-/**
- * Hello world!
- *
- */
+
 public class ChunkLinkDemo
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        ChunkLink chunkLink = new ChunkLink();
+        chunkLink.linkChunks("C:\\Users\\dagig\\workspace\\chunk-link\\src\\sample.txt");
+
+        chunkLink.reconstruct("copySample.txt");
     }
 }
