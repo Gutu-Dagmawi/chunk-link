@@ -6,12 +6,12 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Represents a node in the ChunkLink structure containing file data and checksum validation.
- * Each node stores a portion of file data and maintains a SHA-256 hash of the next node's data
+ * Each node stores a portion of file data and maintains SHA-256 hash of the next node's data
  * to ensure data integrity across the chain.
  */
 public class Node {
     /** The chunk data stored in this node */
-    private String data;
+    private final String data;
     /** SHA-256 hash of the next node's data for integrity verification */
     private String nextCheckSum;
     /** Reference to the next node in the chain */
