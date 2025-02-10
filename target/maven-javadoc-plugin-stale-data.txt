@@ -1,0 +1,41 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+-source
+'23'
+-sourcepath
+'C:/Users/dagig/workspace/chunk-link/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/dagig/workspace/chunk-link/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'chunk-link 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'chunk-link 1.0-SNAPSHOT API'
+com.assignment
+C:\Users\dagig\workspace\chunk-link\src\main\java = 1739032846371
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\allclasses-index.html = 1739187221210
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\allpackages-index.html = 1739187221214
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\element-list = 1739187221153
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\help-doc.html = 1739187221244
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\index-all.html = 1739187221235
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\index.html = 1739187221239
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\member-search-index.js = 1739187221221
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\module-search-index.js = 1739187221217
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\overview-tree.html = 1739187221197
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\package-search-index.js = 1739187221218
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\search.html = 1739187221237
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\tag-search-index.js = 1739187221222
+C:\Users\dagig\workspace\chunk-link\target\reports\apidocs\type-search-index.js = 1739187221219

@@ -27,7 +27,7 @@ public class ChunkLink {
      */
     void linkChunks(String path){
         try (BufferedInputStream bufferInputStream = new BufferedInputStream(Files.newInputStream(Paths.get(path)))) {
-            byte[] tempBuffer = new byte[1024 * 1024];
+            byte[] tempBuffer = new byte[1024];
             int bytesRead;
             while ((bytesRead = bufferInputStream.read(tempBuffer)) != -1) {
                 String chunk = new String(tempBuffer, 0, bytesRead);
@@ -99,7 +99,6 @@ public class ChunkLink {
                 e.printStackTrace();
                 return;
             }
-
             currentNode = currentNode.getNextNode();
         }
     }
